@@ -1512,32 +1512,7 @@
     return Math.floor(Math.random() * (max - min) + min);
   }
 
-  // Netlify Form Submission
-  document.getElementById("my-form").addEventListener("submit", async function (event) {
-    console.log("Form submitted"); // Debugging
-    event.preventDefault(); // Prevent default submission
-
-    const form = event.target;
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch("/", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        alert("Form submitted successfully!");
-        form.reset(); // Reset the form on success
-      } else {
-        console.log("Submission failed");
-        document.getElementById("error-message").style.display = "block"; // Show error message
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      document.getElementById("error-message").style.display = "block"; // Show error message
-    }
-  });
+  
 </script>
 </body>
 
